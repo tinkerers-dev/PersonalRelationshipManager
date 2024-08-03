@@ -8,14 +8,19 @@ namespace PersonalRelationshipManager.Relationships.Infrastructure.Http;
 
 [ApiController]
 [Route("/relationships")]
-public class CreateRelationshipController(IUseCase<CreateRelationshipDto, IResult<Relationship>> useCase)
+public class CreateRelationshipController(IUseCase<CreateRelationshipDto, Result<Relationship>> useCase)
 {
 
     [HttpPost]
-    public async Task CreateRelationship(CreateRelationshipRequest createRelationshipRequest)
+    public async Task<IActionResult> CreateRelationship(CreateRelationshipRequest createRelationshipRequest)
     {
         var result = await useCase.Execute(new CreateRelationshipDto());
-        
-        
+
+
+        var relationship = result.Value;
+        var relationshipId = relationship.GetId();
+
+        return new CreatedResult("", new CreateRelationshipResponse(relationshipId));
     }
+    
 }

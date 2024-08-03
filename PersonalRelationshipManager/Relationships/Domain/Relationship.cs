@@ -1,5 +1,13 @@
-﻿namespace PersonalRelationshipManager.Relationships.Domain;
+﻿using PersonalRelationshipManager.Relationships.Domain.ValueObjects;
 
-public class Relationship
+namespace PersonalRelationshipManager.Relationships.Domain;
+
+public class Relationship(RelationshipId id)
 {
+    private readonly RelationshipId _id = id;
+
+    public RelationshipId GetId()
+    {
+        return _id;
+    }
 }
