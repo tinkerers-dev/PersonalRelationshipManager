@@ -1,0 +1,6 @@
+﻿services:
+  personalrelationshipmanager:
+    image: personalrelationshipmanager
+    build:
+      context: .
+      dockerfile: PersonalRelationshipManager/Dockerfile
