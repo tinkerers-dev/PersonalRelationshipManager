@@ -49,7 +49,7 @@ public class Result<TValue>
                 throw new InvalidOperationException("No error for success result");
             }
 
-            return Error!;
+            return _error!;
         }
     }
 
