@@ -1,4 +1,5 @@
 ﻿using PersonalRelationshipManager.Relationships.Domain;
+using PersonalRelationshipManager.Relationships.Domain.Errors;
 using PersonalRelationshipManager.Relationships.Domain.Repositories;
 using PersonalRelationshipManager.Shared;
 
@@ -12,9 +13,16 @@ public class CreateRelationshipUseCase(
     public async Task<Result<Relationship>> Execute(CreateRelationshipDto input)
     {
         var id = guidService.RandomGuid();
-        var relationship = new Relationship(id, input.Type, input.Name, input.Nickname, input.Phone, input.Email,
-            input.ContactMethods);
-        await relationshipRepository.SaveRelationship(relationship);
-        return Result<Relationship>.Ok(relationship);
+
+        try
+        {
+            var relationship = new Relationship(id, input.Type, input.Name, input.Nickname, input.Phone, input.Email,
+                input.ContactMethods);
+            await relationshipRepository.SaveRelationship(relationship);
+            return Result<Relationship>.Ok(relationship);
+        } catch (Exception e)
+        {
+            return Result<Relationship>.Failure(new UnableToCreateRelationshipError(e));
+        }
     }
 }

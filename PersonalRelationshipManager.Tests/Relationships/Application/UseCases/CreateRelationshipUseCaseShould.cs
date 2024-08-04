@@ -4,6 +4,7 @@ using Moq;
 using PersonalRelationshipManager.Relationships.Application;
 using PersonalRelationshipManager.Relationships.Application.UseCases;
 using PersonalRelationshipManager.Relationships.Domain;
+using PersonalRelationshipManager.Relationships.Domain.Errors;
 using PersonalRelationshipManager.Relationships.Domain.Repositories;
 using PersonalRelationshipManager.Shared;
 using PersonalRelationshipManager.Tests.Builders;
@@ -48,5 +49,18 @@ public class CreateRelationshipUseCaseShould
 
         result.IsSuccess().Should().BeTrue();
         result.Value.Should().BeOfType<Relationship>().Which.GetId().Value.Should().Be(id);
+    }
+
+    [Fact]
+    public void ReturnFailureResultWhenRelationshipCannotBeCreatedAndSavedToDatabase()
+    {
+        var createRelationshipDto = CreateRelationshipDtoBuilder.AFriend().Build();
+        _relationshipRepository.Setup(repository => repository.SaveRelationship(It.IsAny<Relationship>()))
+            .ThrowsAsync(new Exception());
+
+        var result = _useCase.Execute(createRelationshipDto).Result;
+
+        result.IsFailure().Should().BeTrue();
+        result.Error.Should().BeOfType<UnableToCreateRelationshipError>();
     }
 }
