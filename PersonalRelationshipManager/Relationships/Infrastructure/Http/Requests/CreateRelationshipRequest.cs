@@ -15,12 +15,12 @@ public class CreateRelationshipRequest
     public CreateRelationshipDto ToDto()
     {
         return new CreateRelationshipDto(
-            this.Type,
-            this.Name,
-            this.NickName,
-            this.Phone,
-            this.Email,
-            this.ContactMethods
+            Type,
+            Name,
+            NickName,
+            Phone,
+            Email,
+            ContactMethods
         );
     }
 }

@@ -5,7 +5,6 @@ using Moq;
 using PersonalRelationshipManager.Relationships.Application;
 using PersonalRelationshipManager.Relationships.Domain;
 using PersonalRelationshipManager.Relationships.Domain.Errors;
-using PersonalRelationshipManager.Relationships.Domain.ValueObjects;
 using PersonalRelationshipManager.Relationships.Infrastructure.Http;
 using PersonalRelationshipManager.Relationships.Infrastructure.Http.Requests;
 using PersonalRelationshipManager.Shared;
@@ -17,8 +16,8 @@ public class CreateRelationshipControllerShould
 {
     private readonly Mock<IUseCase<CreateRelationshipDto, Result<Relationship>>> _createRelationshipUseCase;
     private readonly CreateRelationshipController _createRelationshipController;
-    private CreateRelationshipRequest _createRelationshipRequest = CreateRelationshipRequestBuilder.AFriend().Build();
-    private CreateRelationshipDto _createRelationshipDto = CreateRelationshipDtoBuilder.AFriend().Build();
+    private readonly CreateRelationshipRequest _createRelationshipRequest = CreateRelationshipRequestBuilder.AFriend().Build();
+    private readonly CreateRelationshipDto _createRelationshipDto = CreateRelationshipDtoBuilder.AFriend().Build();
 
     public CreateRelationshipControllerShould()
     {
@@ -31,7 +30,7 @@ public class CreateRelationshipControllerShould
     {
         var id = Guid.NewGuid();
         var relationship = RelationshipBuilder.AFriend().WithId(id).Build();
-        _createRelationshipUseCase.Setup(useCase => useCase.Execute(_createRelationshipDto))
+        _createRelationshipUseCase.Setup(useCase => useCase.Execute(It.IsAny<CreateRelationshipDto>()))
             .ReturnsAsync(Result<Relationship>.Ok(relationship));
 
         var actionResult = await _createRelationshipController.CreateRelationship(_createRelationshipRequest);
@@ -45,7 +44,7 @@ public class CreateRelationshipControllerShould
     [Fact]
     public async Task RespondWithStatusCode500WhenRelationshipCouldNotBeCreated()
     {
-        _createRelationshipUseCase.Setup(useCase => useCase.Execute(_createRelationshipDto))
+        _createRelationshipUseCase.Setup(useCase => useCase.Execute(It.IsAny<CreateRelationshipDto>()))
             .ReturnsAsync(Result<Relationship>.Failure(new UnableToCreateRelationshipError()));
 
         var actionResult = await _createRelationshipController.CreateRelationship(_createRelationshipRequest);

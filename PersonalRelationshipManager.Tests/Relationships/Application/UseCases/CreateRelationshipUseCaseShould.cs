@@ -1,7 +1,6 @@
 ﻿using FluentAssertions;
 using JetBrains.Annotations;
 using Moq;
-using PersonalRelationshipManager.Relationships.Application;
 using PersonalRelationshipManager.Relationships.Application.UseCases;
 using PersonalRelationshipManager.Relationships.Domain;
 using PersonalRelationshipManager.Relationships.Domain.Errors;
