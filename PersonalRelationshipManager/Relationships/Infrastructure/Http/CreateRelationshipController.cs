@@ -14,7 +14,7 @@ public class CreateRelationshipController(IUseCase<CreateRelationshipDto, Result
     [HttpPost]
     public async Task<IActionResult> CreateRelationship(CreateRelationshipRequest createRelationshipRequest)
     {
-        var result = await useCase.Execute(new CreateRelationshipDto());
+        var result = await useCase.Execute(createRelationshipRequest.ToDto());
 
         if (result.IsFailure())
         {
