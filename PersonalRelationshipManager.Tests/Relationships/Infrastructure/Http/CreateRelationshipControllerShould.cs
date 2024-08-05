@@ -17,7 +17,6 @@ public class CreateRelationshipControllerShould
     private readonly Mock<IUseCase<CreateRelationshipDto, Result<Relationship>>> _createRelationshipUseCase;
     private readonly CreateRelationshipController _createRelationshipController;
     private readonly CreateRelationshipRequest _createRelationshipRequest = CreateRelationshipRequestBuilder.AFriend().Build();
-    private readonly CreateRelationshipDto _createRelationshipDto = CreateRelationshipDtoBuilder.AFriend().Build();
 
     public CreateRelationshipControllerShould()
     {

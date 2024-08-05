@@ -51,4 +51,59 @@ public class Relationship
     {
         return _id;
     }
+
+    public RelationshipType GetType()
+    {
+        return _type;
+    }
+
+    public Name GetName()
+    {
+        return _name;
+    }
+
+    public Nickname GetNickname()
+    {
+        return _nickname;
+    }
+
+    public Phone GetPhone()
+    {
+        return _phone;
+    }
+
+    public Email GetEmail()
+    {
+        return _email;
+    }
+
+    public ContactMethods GetContactMethods()
+    {
+        return _contactMethods;
+    }
+
+    protected bool Equals(Relationship other)
+    {
+        return _id.Equals(other._id);
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return ReferenceEquals(this, obj) || obj is Relationship other && Equals(other);
+    }
+
+    public override int GetHashCode()
+    {
+        return _id.GetHashCode();
+    }
+
+    public static bool operator ==(Relationship? left, Relationship? right)
+    {
+        return Equals(left, right);
+    }
+
+    public static bool operator !=(Relationship? left, Relationship? right)
+    {
+        return !Equals(left, right);
+    }
 }

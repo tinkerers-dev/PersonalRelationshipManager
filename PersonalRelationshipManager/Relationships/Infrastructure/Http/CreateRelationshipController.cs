@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using PersonalRelationshipManager.Relationships.Application;
 using PersonalRelationshipManager.Relationships.Domain;
 using PersonalRelationshipManager.Relationships.Infrastructure.Http.Requests;

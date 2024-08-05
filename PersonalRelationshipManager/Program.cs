@@ -1,3 +1,8 @@
+using PersonalRelationshipManager.Relationships.Application;
+using PersonalRelationshipManager.Relationships.Application.UseCases;
+using PersonalRelationshipManager.Relationships.Domain;
+using PersonalRelationshipManager.Shared;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+
+builder.Services.AddScoped<IUseCase<CreateRelationshipDto, Result<Relationship>>, CreateRelationshipUseCase>();
 
 var app = builder.Build();
 

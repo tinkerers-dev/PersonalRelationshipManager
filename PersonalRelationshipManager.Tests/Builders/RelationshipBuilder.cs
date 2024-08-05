@@ -19,7 +19,7 @@ public class RelationshipBuilder
 
     private RelationshipBuilder(string type)
     {
-        this._type = type;
+        _type = type;
     }
 
     public static RelationshipBuilder AFriend()
@@ -29,37 +29,37 @@ public class RelationshipBuilder
 
     public RelationshipBuilder WithId(Guid id)
     {
-        this._id = id;
+        _id = id;
         return this;
     }
 
     public RelationshipBuilder WithName(string name)
     {
-        this._name = name;
+        _name = name;
         return this;
     }
 
     public RelationshipBuilder WithNickname(string nickname)
     {
-        this._nickname = nickname;
+        _nickname = nickname;
         return this;
     }
 
     public RelationshipBuilder WithPhone(string phone)
     {
-        this._phone = phone;
+        _phone = phone;
         return this;
     }
 
     public RelationshipBuilder WithEmail(string email)
     {
-        this._email = email;
+        _email = email;
         return this;
     }
 
     public RelationshipBuilder WithContactMethods(params string[] contactMethods)
     {
-        this._contactMethods = contactMethods;
+        _contactMethods = contactMethods;
         return this;
     }
 

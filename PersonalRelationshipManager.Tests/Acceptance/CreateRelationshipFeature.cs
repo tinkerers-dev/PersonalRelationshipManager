@@ -3,7 +3,6 @@ using System.Net.Http.Json;
 using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
 using PersonalRelationshipManager.Relationships.Infrastructure.Http.Requests;
 
 namespace PersonalRelationshipManager.Tests.Acceptance;
@@ -12,7 +11,7 @@ public class ApiWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureAppConfiguration(configurationBuilder => { });
+        builder.ConfigureAppConfiguration(_ => { });
     }
 }
 
