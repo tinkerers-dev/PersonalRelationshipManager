@@ -1,19 +1,13 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
 using FluentAssertions;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.Extensions.Options;
 using PersonalRelationshipManager.Relationships.Infrastructure.Http.Requests;
+using PersonalRelationshipManager.Shared.Infrastructure.Persistence;
+using PersonalRelationshipManager.Tests.Factories;
+using Testcontainers.PostgreSql;
 
 namespace PersonalRelationshipManager.Tests.Acceptance;
-
-public class ApiWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
-{
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
-    {
-        builder.ConfigureAppConfiguration(_ => { });
-    }
-}
 
 public class CreateRelationshipFeature(ApiWebApplicationFactory<Program> factory)
     : IClassFixture<ApiWebApplicationFactory<Program>>

@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Options;
 using PersonalRelationshipManager.Relationships.Application;
 using PersonalRelationshipManager.Relationships.Application.UseCases;
 using PersonalRelationshipManager.Relationships.Domain;
@@ -24,6 +25,9 @@ builder.Services.AddScoped<IGuidService, DefaultGuidService>();
 
 var app = builder.Build();
 
+// TODO: Find a better place/way to do this
+var databaseSettings = app.Services.GetRequiredService<IOptions<DatabaseSettings>>();
+RunMigration(databaseSettings);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -36,6 +40,12 @@ app.UseHttpsRedirection();
 app.MapControllers();
 
 app.Run();
+
+static void RunMigration(IOptions<DatabaseSettings> options)
+{
+    var dbUpMigrationRunner = new DbUpMigrationRunner(options);
+    dbUpMigrationRunner.RunMigrations().Wait();
+}
 
 public partial class Program
 {
