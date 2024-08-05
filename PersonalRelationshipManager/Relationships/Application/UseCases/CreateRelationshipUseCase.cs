@@ -6,7 +6,7 @@ using PersonalRelationshipManager.Shared;
 namespace PersonalRelationshipManager.Relationships.Application.UseCases;
 
 public class CreateRelationshipUseCase(
-    IRelationshipRepository relationshipRepository,
+    IRelationshipsRepository relationshipsRepository,
     IGuidService guidService)
     : IUseCase<CreateRelationshipDto, Result<Relationship>>
 {
@@ -18,7 +18,7 @@ public class CreateRelationshipUseCase(
         {
             var relationship = new Relationship(id, input.Type, input.Name, input.Nickname, input.Phone, input.Email,
                 input.ContactMethods);
-            await relationshipRepository.SaveRelationship(relationship);
+            await relationshipsRepository.SaveRelationship(relationship);
             return Result<Relationship>.Ok(relationship);
         } catch (Exception e)
         {

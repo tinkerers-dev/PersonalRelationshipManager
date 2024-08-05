@@ -13,13 +13,13 @@ namespace PersonalRelationshipManager.Tests.Relationships.Application.UseCases;
 [TestSubject(typeof(CreateRelationshipUseCase))]
 public class CreateRelationshipUseCaseShould
 {
-    private readonly Mock<IRelationshipRepository> _relationshipRepository;
+    private readonly Mock<IRelationshipsRepository> _relationshipRepository;
     private readonly Mock<IGuidService> _guidService;
     private readonly CreateRelationshipUseCase _useCase;
 
     public CreateRelationshipUseCaseShould()
     {
-        _relationshipRepository = new Mock<IRelationshipRepository>();
+        _relationshipRepository = new Mock<IRelationshipsRepository>();
         _guidService = new Mock<IGuidService>();
         _useCase = new CreateRelationshipUseCase(_relationshipRepository.Object, _guidService.Object);
     }

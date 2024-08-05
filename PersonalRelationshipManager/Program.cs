@@ -1,7 +1,12 @@
 using PersonalRelationshipManager.Relationships.Application;
 using PersonalRelationshipManager.Relationships.Application.UseCases;
 using PersonalRelationshipManager.Relationships.Domain;
+using PersonalRelationshipManager.Relationships.Domain.Repositories;
+using PersonalRelationshipManager.Relationships.Infrastructure.Persistence;
+using PersonalRelationshipManager.Relationships.Integration.Persistence;
 using PersonalRelationshipManager.Shared;
+using PersonalRelationshipManager.Shared.Infrastructure;
+using PersonalRelationshipManager.Shared.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +17,10 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<IUseCase<CreateRelationshipDto, Result<Relationship>>, CreateRelationshipUseCase>();
+builder.Services.AddScoped<IRelationshipsRepository, PostgresRelationshipsesRepository>();
+builder.Services.AddScoped<IMapper<Relationship, RelationshipData>, RelationshipMapper>();
+builder.Services.AddScoped<IMigrationRunner, DbUpMigrationRunner>();
+builder.Services.AddScoped<IGuidService, DefaultGuidService>();
 
 var app = builder.Build();
 

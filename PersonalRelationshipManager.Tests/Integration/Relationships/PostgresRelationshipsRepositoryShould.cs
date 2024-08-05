@@ -20,7 +20,7 @@ public class PostgresRelationshipsRepositoryShould : IAsyncLifetime
             ConnectionString = _postgreSqlContainer.GetConnectionString()
         };
 
-        var migrationRunner = new MigrationRunner(Options.Create(_databaseSettings));
+        var migrationRunner = new DbUpMigrationRunner(Options.Create(_databaseSettings));
         await migrationRunner.RunMigrations();
     }
 
@@ -33,7 +33,7 @@ public class PostgresRelationshipsRepositoryShould : IAsyncLifetime
     public async Task SaveAndRetrieveRelationshipFromDatabase()
     {
         var postgresRelationshipsRepository =
-            new PostgresRelationshipsRepository(Options.Create(_databaseSettings), new RelationshipMapper());
+            new PostgresRelationshipsesRepository(Options.Create(_databaseSettings), new RelationshipMapper());
         var relationship = RelationshipBuilder.AFriend().Build();
 
         await postgresRelationshipsRepository.SaveRelationship(relationship);

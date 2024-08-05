@@ -4,11 +4,11 @@ using Microsoft.Extensions.Options;
 
 namespace PersonalRelationshipManager.Shared.Infrastructure.Persistence;
 
-public class MigrationRunner
+public class DbUpMigrationRunner : IMigrationRunner
 {
     private readonly IOptions<DatabaseSettings> _databaseSettings;
 
-    public MigrationRunner(IOptions<DatabaseSettings> databaseSettings)
+    public DbUpMigrationRunner(IOptions<DatabaseSettings> databaseSettings)
     {
         _databaseSettings = databaseSettings;
     }

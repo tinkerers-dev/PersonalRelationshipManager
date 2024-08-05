@@ -2,7 +2,7 @@
 
 namespace PersonalRelationshipManager.Relationships.Domain.Repositories;
 
-public interface IRelationshipRepository
+public interface IRelationshipsRepository
 {
     Task SaveRelationship(Relationship relationship);
     Task<Relationship> FindRelationshipById(RelationshipId id);

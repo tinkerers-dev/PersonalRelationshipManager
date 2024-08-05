@@ -9,12 +9,12 @@ using PersonalRelationshipManager.Shared.Infrastructure.Persistence;
 
 namespace PersonalRelationshipManager.Relationships.Infrastructure.Persistence;
 
-public class PostgresRelationshipsRepository : IRelationshipRepository
+public class PostgresRelationshipsesRepository : IRelationshipsRepository
 {
     private readonly IOptions<DatabaseSettings> _databaseSettings;
     private readonly IMapper<Relationship, RelationshipData> _relationshipMapper;
 
-    public PostgresRelationshipsRepository(IOptions<DatabaseSettings> databaseSettings,
+    public PostgresRelationshipsesRepository(IOptions<DatabaseSettings> databaseSettings,
         IMapper<Relationship, RelationshipData> relationshipMapper)
     {
         _databaseSettings = databaseSettings;
